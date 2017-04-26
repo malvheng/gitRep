@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itgod.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.itgod.entity.User" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USE_NME" property="useNme" jdbcType="VARCHAR" />
+    <result column="USE_PAW" property="usePaw" jdbcType="VARCHAR" />
+    <result column="USE_PHO" property="usePho" jdbcType="VARCHAR" />
+    <result column="USE_EMA" property="useEma" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USE_NME, USE_PAW, USE_PHO, USE_EMA
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.itgod.entity.User" >
+    insert into user (ID, USE_NME, USE_PAW, 
+      USE_PHO, USE_EMA)
+    values (#{id,jdbcType=VARCHAR}, #{useNme,jdbcType=VARCHAR}, #{usePaw,jdbcType=VARCHAR}, 
+      #{usePho,jdbcType=VARCHAR}, #{useEma,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itgod.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="useNme != null" >
+        USE_NME,
+      </if>
+      <if test="usePaw != null" >
+        USE_PAW,
+      </if>
+      <if test="usePho != null" >
+        USE_PHO,
+      </if>
+      <if test="useEma != null" >
+        USE_EMA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="useNme != null" >
+        #{useNme,jdbcType=VARCHAR},
+      </if>
+      <if test="usePaw != null" >
+        #{usePaw,jdbcType=VARCHAR},
+      </if>
+      <if test="usePho != null" >
+        #{usePho,jdbcType=VARCHAR},
+      </if>
+      <if test="useEma != null" >
+        #{useEma,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itgod.entity.User" >
+    update user
+    <set >
+      <if test="useNme != null" >
+        USE_NME = #{useNme,jdbcType=VARCHAR},
+      </if>
+      <if test="usePaw != null" >
+        USE_PAW = #{usePaw,jdbcType=VARCHAR},
+      </if>
+      <if test="usePho != null" >
+        USE_PHO = #{usePho,jdbcType=VARCHAR},
+      </if>
+      <if test="useEma != null" >
+        USE_EMA = #{useEma,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itgod.entity.User" >
+    update user
+    set USE_NME = #{useNme,jdbcType=VARCHAR},
+      USE_PAW = #{usePaw,jdbcType=VARCHAR},
+      USE_PHO = #{usePho,jdbcType=VARCHAR},
+      USE_EMA = #{useEma,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
